@@ -1,0 +1,4 @@
+name: secret-santa-2k22
+recipe: laravel
+config:
+  webroot: public
