@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <div>
+    <label for="pseudonyme">Pseudonyme</label>
+    <input
+      [ngClass]="{ 'invalid': submitted && loginForm.controls.pseudonyme.errors }"
+      formControlName="email"
+      id="pseudonyme"
+      placeholder="pseudonyme">
+    <div *ngIf="submitted && loginForm.controls.pseudonyme.errors">
+      <div *ngIf="loginForm.controls.pseudonyme.errors['required']">Ton pseudo est requis</div>
+    </div>
+  </div>
+  <div>
+    <label for="password">Mot de passe</label>
+    <input
+      [ngClass]="{ 'invalid': submitted && loginForm.controls.password.errors }"
+      formControlName="password"
+      id="password"
+      placeholder="mot de passe"
+      type="password">
+    <div *ngIf="submitted && loginForm.controls.password.errors">
+      <div *ngIf="loginForm.controls.password.errors['required']">Le mot de passe est requis</div>
+    </div>
+  </div>
+  <div>
+    <label for="rememberMe">
+      Se souvenir de moi
+    </label>
+    <input
+      formControlName="rememberMe"
+      type="checkbox"
+      id="rememberMe">
+  </div>
+
+  <button type="submit">Se connecter</button>
+</form>

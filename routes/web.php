@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return ['Laravel' => app()->version()];
-});
+Route::any('/{any}', function () {
+    // return ['Laravel' => app()->version()];
+    return view('angular');
+})->where('any', '^(?!api).*$');
 
-require __DIR__.'/auth.php';
