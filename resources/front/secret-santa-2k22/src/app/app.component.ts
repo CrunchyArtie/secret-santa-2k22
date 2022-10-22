@@ -9,6 +9,8 @@ import {catchError, EMPTY, of, take} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public loading = false;
+
   constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
 
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   private checkIfAuthenticated() {
+    this.loading = true;
     const token = this.authenticationService.getToken();
     if (token) {
       this.authenticationService.isAuthenticated$.pipe(
@@ -31,6 +34,7 @@ export class AppComponent implements OnInit {
         } else {
           // this.router.navigate(['/']);
         }
+        this.loading = false;
       });
 
       this.authenticationService
@@ -44,6 +48,7 @@ export class AppComponent implements OnInit {
         ).subscribe();
     } else {
       this.logout();
+      this.loading = false;
     }
   }
 
