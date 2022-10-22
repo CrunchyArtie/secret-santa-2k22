@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {catchError, of} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,17 +13,18 @@ export class LoginPageComponent implements OnInit {
 
   public loginForm = this.formBuilder.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   });
-
+  public loading = false;
   private genericErrors = {
-    required: 'Ce champ est requis',
+    required: 'Ce champ est requis'
   };
   private backendErrors: { [control: string]: { [error: string]: string } } = {};
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
   }
 
@@ -31,11 +33,13 @@ export class LoginPageComponent implements OnInit {
 
   public onSubmit() {
     if (this.loginForm.valid) {
+      this.loading = true;
       this.authenticationService
         .login(this.loginForm.value)
         .pipe(
           catchError((error) => {
-              this.backendErrors = error.error.errors;
+              this.backendErrors = (error?.error?.errors ?? {});
+
               for (let backendErrorsKey in this.backendErrors) {
                 const errors = Object.keys(this.backendErrors[backendErrorsKey]);
 
@@ -43,13 +47,14 @@ export class LoginPageComponent implements OnInit {
                   errors.reduce((acc, error) => ({...acc, [error]: true}), {})
                 );
               }
-              return of(error);
+              return of(null);
             }
           ))
         .subscribe((response) => {
-          console.log('register-page.component::34::onSubmit', response);
-          if (response.status !== 201) {
+          if (response !== null) {
+            this.router.navigate(['/']);
           }
+          this.loading = false;
         });
     }
   }

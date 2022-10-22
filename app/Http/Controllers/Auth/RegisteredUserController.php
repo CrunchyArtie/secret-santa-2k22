@@ -33,6 +33,7 @@ class RegisteredUserController extends Controller
 //            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'reindeer' => ['required', 'unique:users', Rule::in([
+                'éclair',
                 'comète',
                 'furie',
                 'danseuse',
@@ -51,9 +52,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
 //        Auth::login($user);
-
-        return response()->json($user);
+        $token = $user->createToken(env('APP_NAME'))->plainTextToken;
+        return response()->json(['token' => $token, 'user' => $user]);
     }
 }

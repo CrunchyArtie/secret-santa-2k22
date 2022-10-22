@@ -20,8 +20,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {Router} from '@angular/router';
 import {filter} from 'rxjs';
-import { CustomInputComponent } from './core/custom-input/custom-input.component';
-import { ReplacePipe } from './pipes/replace.pipe';
+import {CustomInputComponent} from './core/custom-input/custom-input.component';
+import {ReplacePipe} from './pipes/replace.pipe';
+import {HttpJwtInterceptor} from './interceptors/http-jwt.interceptor';
+import {AuthenticatedComponent} from './core/authenticated/authenticated.component';
+import {GuestComponent} from './core/guest/guest.component';
+import {GiftPageComponent} from './pages/gift-page/gift-page.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { ReplacePipe } from './pipes/replace.pipe';
     LandingPageComponent,
     RegisterPageComponent,
     CustomInputComponent,
-    ReplacePipe
+    ReplacePipe,
+    AuthenticatedComponent,
+    GuestComponent,
+    GiftPageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,28 +52,47 @@ import { ReplacePipe } from './pipes/replace.pipe';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
     {provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpJwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router
+  ) {
     this.router
       .events
       .pipe(
         filter(event => event.constructor.name === 'NavigationEnd')
       ).subscribe(() => {
-        this.shuffleBackground();
+      this.shuffleBackground();
     });
   }
 
   private shuffleBackground() {
-    const id = Math.round(Math.random() * 4);
-    document.body.style.backgroundImage = `url(assets/backgrounds/reindeer${id}.png)`;
+    const oldUrl = document.body.style.backgroundImage
+    let newUrl = oldUrl;
+    do {
+      const id = Math.round(Math.random() * 9);
+      newUrl = `url("assets/backgrounds/reindeer${id}.png")`;
+    } while (newUrl === oldUrl);
+    document.body.style.backgroundImage = newUrl;
+
+
+    const oldSize = document.body.style.backgroundSize
+    let newSize = oldSize;
+    do {
+      const size = 2.5 * (20 + Math.round(Math.random() * 9));
+      newSize = `${size}%, ${size}%`;
+    } while (newSize === oldSize);
+    document.body.style.backgroundSize = newSize;
+
   }
 }

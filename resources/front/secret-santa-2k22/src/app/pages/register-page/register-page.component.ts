@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {catchError, of} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -17,7 +18,7 @@ export class RegisterPageComponent implements OnInit {
     password: ['', [Validators.required]],
     password_confirmation: ['', [Validators.required]]
   });
-  public submitted = false;
+  public loading = false;
   private genericErrors = {
     required: 'Ce champ est requis',
     minlength: 'Ce champ doit contenir au moins 3 caractères'
@@ -26,7 +27,8 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
   }
 
@@ -35,11 +37,13 @@ export class RegisterPageComponent implements OnInit {
 
   public onSubmit() {
     if (this.registerForm.valid) {
+      this.loading = true;
+
       this.authenticationService
         .register(this.registerForm.value)
         .pipe(
           catchError((error) => {
-              this.backendErrors = error.error.errors;
+              this.backendErrors = error?.error?.errors;
               for (let backendErrorsKey in this.backendErrors) {
                 const errors = Object.keys(this.backendErrors[backendErrorsKey]);
 
@@ -47,13 +51,14 @@ export class RegisterPageComponent implements OnInit {
                   errors.reduce((acc, error) => ({...acc, [error]: true}), {})
                 );
               }
-              return of(error);
+              return of(null);
             }
           ))
         .subscribe((response) => {
-          console.log('register-page.component::34::onSubmit', response);
-          if (response.status !== 201) {
+          if (response !== null) {
+            this.router.navigate(['/']);
           }
+          this.loading = false;
         });
     }
   }
@@ -64,6 +69,4 @@ export class RegisterPageComponent implements OnInit {
       ...(this.backendErrors[control] ?? {})
     };
   }
-
-
 }

@@ -1,1 +1,50 @@
-<p>landing-page works!</p>
+<app-guest>
+  <mat-card>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="text">
+        <h1>Salut toi !</h1>
+        <p>Si tu es nouveau ici, il va falloir te créer un compte.</p>
+        <p>
+          <button color="accent" mat-raised-button routerLink="/register">S'inscrire</button>
+        </p>
+        <p>Mais pour ça, il va falloir que tu te souviennes du nom de rene que tu as reçu sur la conversation
+          messenger :)</p>
+        <p>Si tu es déjà inscrit, il va falloir te connecter.
+        </p>
+        <p>
+          <button color="primary" mat-raised-button routerLink="/login">Se connecter</button>
+        </p>
+      </div>
+      <img alt="Rene" src="https://media.giphy.com/media/pkKdPkHz94xAdEroWh/giphy.gif"/>
+    </mat-card-content>
+  </mat-card>
+</app-guest>
+
+<app-authenticated>
+  <mat-card>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>Bienvenue {{(user$ | async)?.reindeer | titlecase}}</h1>
+      <p>
+        Si t'es arrivé jusqu'ici c'est que t'es une reine de l'internet ! (reine/renne, t'as compris ?)
+      </p>
+      <img alt="lol reindeer" src="https://media.giphy.com/media/ZQgzandYzoU5W/giphy.gif">
+      <p>
+        Si tu as trouver ma blague amusante, tu peux immédiatement aller sur la page des cadeaux et choisir ce que tu
+        veux !
+      </p>
+      <p>
+        <button color="primary" mat-raised-button routerLink="/gift">Voir les cadeaux</button>
+      </p>
+      <p>
+        Mais si tu es là pour découvrir l'identité du rène à qui il te faudra offrir un cadeau, va falloir revenir une
+        autre fois !
+        On attend que tout le monde soit prêt !
+      </p>
+      <img alt="christmas is coming" src="https://media.giphy.com/media/mATqoqwcLzqNKkLcOR/giphy.gif">
+    </mat-card-content>
+  </mat-card>
+</app-authenticated>

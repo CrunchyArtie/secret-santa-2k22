@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $secret-santa-2k22-primary: mat.define-palette(mat.$light-blue-palette, 200, 500, 500);
-$secret-santa-2k22-accent: mat.define-palette(mat.$cyan-palette, 200, 500, 500);
+$secret-santa-2k22-accent: mat.define-palette(mat.$brown-palette, 200, 500, 500);
 
 // The warn palette is optional (defaults to red).
 $secret-santa-2k22-warn: mat.define-palette(mat.$red-palette);
@@ -36,7 +36,7 @@ $secret-santa-2k22-theme: mat.define-light-theme((
 
 html, body {
   height: 100%;
-  background-size: 25%, 25%;
+  //background-size: 25%, 25%;
 
   //@for $i from 1 through 4 {
   //  .background-#{$i} {
@@ -48,4 +48,6 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background-image 0.25s ease-in-out, background-size 0.25s ease-in-out;
+  background-position: center;
 }

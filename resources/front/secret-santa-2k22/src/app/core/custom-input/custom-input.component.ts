@@ -18,9 +18,7 @@ export class CustomInputComponent implements OnInit {
   @Input() public type: string = 'text';
   @Input() public errorMessages!: { [key: string]: string };
   @Input() public hint?: string;
-
-  constructor() {
-  }
+  public shouldHide = true;
 
   ngOnInit(): void {
   }

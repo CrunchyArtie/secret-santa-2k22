@@ -9,19 +9,28 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function get(Request $request)
+    {
+        $request->authenticate();
+        $user = $request->user();
+        $token = $user->createToken(env('APP_NAME'))->plainTextToken;
+
+        return response()->json(['token' => $token]);
+    }
+
     /**
      * Handle an incoming authentication request.
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function store(LoginRequest $request)
     {
         $request->authenticate();
+        $user = $request->user();
+        $token = $user->createToken(env('APP_NAME'))->plainTextToken;
 
-        $request->session()->regenerate();
-
-        return response()->noContent();
+        return response()->json(['token' => $token, 'user' => $user]);
     }
 
     /**

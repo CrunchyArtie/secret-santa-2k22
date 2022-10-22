@@ -17,6 +17,7 @@ export class IsAuthenticatedGuard implements CanActivate {
       take(1),
       tap(isAuthenticated => {
         if (isAuthenticated === false) {
+          console.log('is-authenticated.guard::20::no no no');
           this.router.navigate(['/login']);
         }
       })

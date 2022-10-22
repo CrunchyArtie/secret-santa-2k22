@@ -19,6 +19,7 @@ export class IsGuestGuard implements CanActivate {
       map(isAuthenticated => !isAuthenticated),
       tap(isGuest => {
         if (isGuest === false) {
+          console.log('is-guest.guard::22::no no no');
           this.router.navigate(['/']);
         }
       })

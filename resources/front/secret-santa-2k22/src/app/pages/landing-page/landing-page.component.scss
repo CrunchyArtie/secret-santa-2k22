@@ -1,0 +1,58 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+
+mat-card {
+  max-width: 50%;
+  margin: 0 auto 10px auto;
+}
+
+app-guest mat-card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+app-guest mat-card-content .text {
+  margin: 0 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 5px;
+}
+
+app-guest img {
+  width: 33%;
+  height: 33%;
+  object-fit: contain;
+}
+
+app-authenticated img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  //display: block;
+  //margin-left: auto;
+  //margin-right: auto;
+}
+
+app-authenticated p {
+  //margin-top: 5px;
+}
+
+app-authenticated mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 5px;
+}
+

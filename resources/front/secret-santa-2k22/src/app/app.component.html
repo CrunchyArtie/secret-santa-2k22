@@ -1,17 +1,17 @@
-<ng-template #connectButtonTemplate>
-  <a mat-button href="/login">
-    Se connecter
-  </a>
-</ng-template>
-
-
 <p>
   <mat-toolbar color="primary">
-    <span>Secret Santa 2k22 🦌</span>
+    <span routerLink="/">Secret Santa 2k22 🦌</span>
     <span class="example-spacer"></span>
-    <ng-container *ngIf="(isAuthenticated$ | async) else connectButtonTemplate">
-      authentifié
-    </ng-container>
+    <app-authenticated>
+        <button mat-button (click)="logout()" >
+          Se déconnecter
+        </button>
+    </app-authenticated>
+    <app-guest>
+        <a mat-button routerLink="/login">
+          Se connecter
+        </a>
+    </app-guest>
   </mat-toolbar>
 </p>
 

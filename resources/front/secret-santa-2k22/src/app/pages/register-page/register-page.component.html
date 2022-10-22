@@ -2,8 +2,7 @@
   <mat-card>
     <mat-card-title>Tu veux participer au Secret Santa ?</mat-card-title>
     <mat-card-subtitle>
-      C'est ici pour se créer un compte.
-      Si tu en as déjà un tu peux <a [href]="'/login'">te connecter ici</a>
+      <a routerLink="/login">(Tu as déjà un compte ?)</a>
     </mat-card-subtitle>
     <mat-card-content>
       <div>
@@ -35,7 +34,7 @@
           [control]="registerForm.controls.password"
           [errorMessages]="getErrors('password')"
           [label]="{key: 'password', value: 'Mot de passe'}"
-          type="password"
+          type="hide"
         ></app-custom-input>
       </div>
       <div>
@@ -43,15 +42,18 @@
           [control]="registerForm.controls.password_confirmation"
           [errorMessages]="getErrors('password_confirmation')"
           [label]="{key: 'password_confirmation', value: 'Confirmation mot de passe'}"
-          type="password"
+          type="hide"
         ></app-custom-input>
       </div>
-      <!--      <mat-checkbox formControlName="rememberMe" id="rememberMe">Se souvenir de moi</mat-checkbox>-->
 
 
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button type="submit">S'enregister</button>
+      <a mat-button routerLink="/">Retour</a>
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid || registerForm.pristine || loading">
+        <mat-icon *ngIf="loading"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+        S'enregister
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>
