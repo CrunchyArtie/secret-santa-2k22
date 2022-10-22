@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<ng-template #connectButtonTemplate>
+  <a mat-button href="/login">
+    Se connecter
+  </a>
+</ng-template>
+
+
+<p>
+  <mat-toolbar color="primary">
+    <span>Secret Santa 2k22 🦌</span>
+    <span class="example-spacer"></span>
+    <ng-container *ngIf="(isAuthenticated$ | async) else connectButtonTemplate">
+      authentifié
+    </ng-container>
+  </mat-toolbar>
+</p>
+
+  <router-outlet></router-outlet>

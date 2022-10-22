@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Secret Santa 2k22';
+  public isAuthenticated$ = this.authenticationService.isAuthenticated$;
+
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  }
+
+  public reload() {
+    this.router.navigate(['/']);
+  }
 }

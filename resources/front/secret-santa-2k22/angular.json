@@ -45,8 +45,6 @@
               "output": "../../../resources/views/angular.blade.php"
             },
             "outputPath": "../../../public/assets/angular",
-            // "outputPath": "dist/secret-santa-2k22",
-            // "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
@@ -56,6 +54,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -82,13 +81,24 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "development-back": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "baseHref": "/",
+              "index": "src/index.html",
+              "outputPath": "dist/secret-santa-2k22"
             }
           },
           "defaultConfiguration": "production"
@@ -124,6 +134,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []

@@ -1,0 +1,15 @@
+<mat-form-field appearance="fill">
+  <mat-label [attr.for]="label.key">{{label.value}}</mat-label>
+  <input [ngClass]="{ 'invalid': !control.pristine && control.errors }"
+         [formControlName]="label.key"
+         [id]="label.key"
+         matInput
+         [placeholder]="label.value"
+         [type]="type">
+  <ng-container *ngIf="!control.pristine && control.errors">
+    <mat-error *ngFor="let error of getErrors()">
+      {{error | replace:label.key:label.value}}
+    </mat-error>
+  </ng-container>
+  <mat-hint *ngIf="!!hint">{{hint}}</mat-hint>
+</mat-form-field>

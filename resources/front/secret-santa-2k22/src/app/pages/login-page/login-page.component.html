@@ -1,1 +1,29 @@
-<app-login-form></app-login-form>
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <mat-card>
+    <mat-card-title>Se connecter</mat-card-title>
+      <mat-card-subtitle><a href="/register">(Pas encore inscrit ?)</a></mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <app-custom-input
+          [control]="loginForm.controls.username"
+          [errorMessages]="getErrors('username')"
+          [label]="{key: 'username', value: 'Identifiant'}"
+        ></app-custom-input>
+      </div>
+      <div class="passwords">
+        <app-custom-input
+          [control]="loginForm.controls.password"
+          [errorMessages]="getErrors('password')"
+          [label]="{key: 'password', value: 'Mot de passe'}"
+          type="password"
+        ></app-custom-input>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button type="submit">Se connecter</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+

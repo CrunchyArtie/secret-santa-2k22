@@ -1,1 +1,59 @@
-<app-register-form (onSubmit)="registerFormSubmit($event)"></app-register-form>
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+  <mat-card>
+    <mat-card-title>Tu veux participer au Secret Santa ?</mat-card-title>
+    <mat-card-subtitle>
+      C'est ici pour se créer un compte.
+      Si tu en as déjà un tu peux <a [href]="'/login'">te connecter ici</a>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <app-custom-input
+          [control]="registerForm.controls.reindeer"
+          [errorMessages]="getErrors('reindeer')"
+          [label]="{key: 'reindeer', value: 'Nom de Renne'}"
+          hint="C'est une petite sécurité personnelle ;)"
+        ></app-custom-input>
+      </div>
+      <div>
+        <app-custom-input
+          [control]="registerForm.controls.username"
+          [errorMessages]="getErrors('username')"
+          [label]="{key: 'username', value: 'Identifiant'}"
+          hint="Cet identifiant te permettra de te reconnecter"
+        ></app-custom-input>
+      </div>
+      <div>
+        <app-custom-input
+          [control]="registerForm.controls.name"
+          [errorMessages]="getErrors('name')"
+          [label]="{key: 'name', value: 'Prénom'}"
+          hint="Merci de mettre ton prénom ou surnom qui permettra à ton Secret Santa de savoir qui tu es."
+        ></app-custom-input>
+      </div>
+      <div class="passwords">
+        <app-custom-input
+          [control]="registerForm.controls.password"
+          [errorMessages]="getErrors('password')"
+          [label]="{key: 'password', value: 'Mot de passe'}"
+          type="password"
+        ></app-custom-input>
+      </div>
+      <div>
+        <app-custom-input
+          [control]="registerForm.controls.password_confirmation"
+          [errorMessages]="getErrors('password_confirmation')"
+          [label]="{key: 'password_confirmation', value: 'Confirmation mot de passe'}"
+          type="password"
+        ></app-custom-input>
+      </div>
+      <!--      <mat-checkbox formControlName="rememberMe" id="rememberMe">Se souvenir de moi</mat-checkbox>-->
+
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button type="submit">S'enregister</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+
