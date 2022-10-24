@@ -33,6 +33,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticationService.checkCsrfToken().subscribe();
   }
 
   public onSubmit() {

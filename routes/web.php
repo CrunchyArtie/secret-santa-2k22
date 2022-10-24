@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/{any}', function () {
-    // return ['Laravel' => app()->version()];
+     return ['Laravel' => app()->version()];
 //    return view('angular');
-    abort(404);
+//    abort(404);
 })->where('any', '^(?!api).*$');
 

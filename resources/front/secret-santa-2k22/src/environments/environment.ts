@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://secret-santa-2k22.lndo.site/api/'
+  apiBaseUrl: 'http://secret-santa-2k22.lndo.site/api',
+  csrfUrl: 'http://secret-santa-2k22.lndo.site/sanctum/csrf-cookie'
 };
 
 /*

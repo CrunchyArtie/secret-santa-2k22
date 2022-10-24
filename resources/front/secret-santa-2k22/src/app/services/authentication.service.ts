@@ -68,4 +68,8 @@ export class AuthenticationService {
   private setToken(token: string) {
     localStorage.setItem('auth_token', JSON.stringify(token));
   }
+
+  public checkCsrfToken() {
+    return this.httpClient.get(environment.csrfUrl);
+  }
 }

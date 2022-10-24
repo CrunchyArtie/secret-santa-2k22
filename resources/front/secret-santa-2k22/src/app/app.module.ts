@@ -19,7 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {Router} from '@angular/router';
-import {filter} from 'rxjs';
+import {throttleTime} from 'rxjs';
 import {CustomInputComponent} from './core/custom-input/custom-input.component';
 import {ReplacePipe} from './pipes/replace.pipe';
 import {HttpJwtInterceptor} from './interceptors/http-jwt.interceptor';
@@ -70,7 +70,7 @@ export class AppModule {
     this.router
       .events
       .pipe(
-        filter(event => event.constructor.name === 'NavigationEnd')
+        throttleTime(500)
       ).subscribe(() => {
       this.shuffleBackground();
     });
@@ -89,7 +89,7 @@ export class AppModule {
     const oldSize = document.body.style.backgroundSize
     let newSize = oldSize;
     do {
-      const size = 2.5 * (20 + Math.round(Math.random() * 9));
+      const size = 0.75 * (20 + Math.round(Math.random() * 9));
       newSize = `${size}%, ${size}%`;
     } while (newSize === oldSize);
     document.body.style.backgroundSize = newSize;

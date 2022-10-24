@@ -29,6 +29,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticationService.checkCsrfToken().subscribe();
   }
 
   public onSubmit() {
