@@ -39,12 +39,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/assets/angular/",
-            "index": {
-              "input": "src/index.html",
-              "output": "../../../resources/views/angular.blade.php"
-            },
-            "outputPath": "../../../public/assets/angular",
+            "baseHref": "/",
+            "index": "src/index.html",
+            "outputPath": "dist/secret-santa-2k22",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
@@ -95,10 +92,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "baseHref": "/",
-              "index": "src/index.html",
-              "outputPath": "dist/secret-santa-2k22"
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
