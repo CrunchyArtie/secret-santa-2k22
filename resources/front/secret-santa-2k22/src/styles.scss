@@ -51,3 +51,41 @@ body {
   transition: background-image 0.25s ease-in-out, background-size 0.25s ease-in-out;
   background-position: center;
 }
+
+.reactive-layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+
+  .content {
+    width: 100%;
+  }
+
+  .side-border {
+    min-height: 1px;
+    // 320px 480px for mobile devices,
+    @media only screen and (min-width: 0px) and (max-width: 480px) {
+      width: 2.5%;
+      min-width: 10px;
+    }
+    // 481px 768px for iPads & tablets,
+    @media only screen and (min-width: 481px) and (max-width: 768px) {
+      width: 7.5%;
+    }
+    // 769px 1024px for small screens like laptop,
+    @media only screen and (min-width: 769px) and (max-width: 1024px) {
+      width: 15%;
+    }
+    // 1025px 1200px for large screens like Desktops, and
+    @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+      width: 20%;
+    }
+    // 1201px and above for extra large screens like TV.
+    @media only screen and (min-width: 1201px) {
+      width: 40%;
+    }
+  }
+}

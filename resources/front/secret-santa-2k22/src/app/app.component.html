@@ -15,6 +15,11 @@
   </mat-toolbar>
 </p>
 
-<mat-spinner *ngIf="loading"></mat-spinner>
-
-<router-outlet></router-outlet>
+<div class="reactive-layout">
+  <div class="side-border"></div>
+  <div class="content">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="side-border"></div>
+</div>
