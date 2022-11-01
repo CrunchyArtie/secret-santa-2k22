@@ -29,22 +29,19 @@
     <mat-card-content>
       <h1>Bienvenue {{(user$ | async)?.reindeer | titlecase}}</h1>
       <p>
-        Si t'es arrivé jusqu'ici c'est que t'es une reine de l'internet ! (reine/renne, t'as compris ?)
+        Bonne nouvelle les rennes sont toutes là !
       </p>
-      <img alt="lol reindeer" src="https://media.giphy.com/media/ZQgzandYzoU5W/giphy.gif">
+      <img alt="Rene" src="https://media.giphy.com/media/3mJq8i2W3qbe9AkxgL/giphy.gif"/>
       <p>
-        Si tu as trouver ma blague amusante, tu peux immédiatement aller sur la page des cadeaux et choisir ce que tu
-        veux !
+        J'imagine que tu es là pour découvrir ton raqouc ?
+        Un raqouc c'est un "Renne à qui offrir un cadeau" !
+        Chacun des rennes s'est vu attribué un autre renne à qui offrir un cadeau.
+        Tu vas donc devoir trouver le renne qui t'a été attribué et lui offrir un cadeau.
+        C'est un peu le principe du secret santa donc tu aurais du le savoir non ?
       </p>
       <p>
-        <button color="primary" mat-raised-button routerLink="/gift">Voir les cadeaux</button>
+        <button color="primary" mat-raised-button routerLink="/resolve">Découvrir mon raqouc !</button>
       </p>
-      <p>
-        Mais si tu es là pour découvrir l'identité du rène à qui il te faudra offrir un cadeau, va falloir revenir une
-        autre fois !
-        On attend que tout le monde soit prêt !
-      </p>
-      <img alt="christmas is coming" src="https://media.giphy.com/media/mATqoqwcLzqNKkLcOR/giphy.gif">
     </mat-card-content>
   </mat-card>
 </app-authenticated>

@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
         $token = $user->createToken(env('APP_NAME'))->plainTextToken;
 
-        return response()->json(['token' => $token, 'user' => $user]);
+        return response()->json(['token' => $token, 'user' => $user->load('raqouc')]);
     }
 
     /**

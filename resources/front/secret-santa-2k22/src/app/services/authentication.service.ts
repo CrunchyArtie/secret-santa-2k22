@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {map, ReplaySubject} from 'rxjs';
+import {map, ReplaySubject, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {User} from '../models/user';
+import {RawUserData, User} from '../models/user';
 
-const REGISTER_ENDPOINT = 'register';
-const LOGIN_ENDPOINT = 'login';
-const ME_ENDPOINT = 'user';
+const REGISTER_ENDPOINT = '/register';
+const LOGIN_ENDPOINT = '/login';
+const ME_ENDPOINT = '/user';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,7 @@ export class AuthenticationService {
 
   public refreshUser$({refreshAuthStatus}: { refreshAuthStatus: boolean } = {refreshAuthStatus: false}) {
     return this.httpClient
-      .get<{ id: number, username: string, name: string, created_at: string, updated_at: string, reindeer: string }>(environment.apiBaseUrl + ME_ENDPOINT)
+      .get<RawUserData & {raqouc: RawUserData}>(environment.apiBaseUrl + ME_ENDPOINT)
       .pipe(map(response => {
         this.setUser(response!)
         if (refreshAuthStatus) {
@@ -61,7 +61,7 @@ export class AuthenticationService {
     this.isAuthenticated$.next(false);
   }
 
-  private setUser(responseElement: { id: number, username: string, name: string, created_at: string, updated_at: string, reindeer: string }) {
+  private setUser(responseElement: RawUserData & {raqouc: RawUserData}) {
     this.user$.next(new User(responseElement));
   }
 
@@ -70,6 +70,6 @@ export class AuthenticationService {
   }
 
   public checkCsrfToken() {
-    return this.httpClient.get(environment.csrfUrl);
+    return this.httpClient.get(environment.csrfUrl, {observe: 'response'})
   }
 }

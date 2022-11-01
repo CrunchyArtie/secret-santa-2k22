@@ -18,6 +18,8 @@ export class HttpXsrfInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    req = req.clone({withCredentials: true});
+
     if (req.method === 'GET' || req.method === 'HEAD') {
       return next.handle(req);
     }

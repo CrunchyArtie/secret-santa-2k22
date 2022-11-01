@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {catchError, of} from 'rxjs';
 import {Router} from '@angular/router';
+import {get} from 'lodash-es';
 
 @Component({
   selector: 'app-register-page',
@@ -44,7 +45,7 @@ export class RegisterPageComponent implements OnInit {
         .register(this.registerForm.value)
         .pipe(
           catchError((error) => {
-              this.backendErrors = error?.error?.errors;
+              this.backendErrors = error?.error?.errors || {};
               for (let backendErrorsKey in this.backendErrors) {
                 const errors = Object.keys(this.backendErrors[backendErrorsKey]);
 
@@ -67,7 +68,8 @@ export class RegisterPageComponent implements OnInit {
   public getErrors(control: string) {
     return {
       ...this.genericErrors,
-      ...(this.backendErrors[control] ?? {})
+      ...get(this.backendErrors, control, {})
     };
+
   }
 }

@@ -35,16 +35,18 @@ app-guest img {
 }
 
 app-authenticated img {
-  width: 75%;
-  height: 75%;
+  width: 25%;
+  height: 25%;
   object-fit: contain;
   //display: block;
   //margin-left: auto;
   //margin-right: auto;
+  margin-bottom: 5px;
 }
 
 app-authenticated p {
   //margin-top: 5px;
+  padding: 5px 15px;
 }
 
 app-authenticated mat-card-content {

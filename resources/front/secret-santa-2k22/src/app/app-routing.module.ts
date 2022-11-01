@@ -6,6 +6,7 @@ import {IsAuthenticatedGuard} from './guards/is-authenticated.guard';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {IsGuestGuard} from './guards/is-guest.guard';
 import {GiftPageComponent} from './pages/gift-page/gift-page.component';
+import {ResolvePageComponent} from './pages/resolve-page/resolve-page.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'gift',
     component: GiftPageComponent,
+    canActivate: [IsAuthenticatedGuard]
+  },
+  {
+    path: 'resolve',
+    component: ResolvePageComponent,
     canActivate: [IsAuthenticatedGuard]
   },
   {

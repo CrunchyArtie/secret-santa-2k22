@@ -6,7 +6,7 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {LandingPageComponent} from './pages/landing-page/landing-page.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {APP_BASE_HREF} from '@angular/common';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {HttpXsrfInterceptor} from './interceptors/http-xsrf.interceptor';
 import {HttpErrorInterceptor} from './interceptors/http-error.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -27,6 +27,7 @@ import {AuthenticatedComponent} from './core/authenticated/authenticated.compone
 import {GuestComponent} from './core/guest/guest.component';
 import {GiftPageComponent} from './pages/gift-page/gift-page.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ResolvePageComponent } from './pages/resolve-page/resolve-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReplacePipe,
     AuthenticatedComponent,
     GuestComponent,
-    GiftPageComponent
+    GiftPageComponent,
+    ResolvePageComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'})
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

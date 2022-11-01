@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {catchError, of} from 'rxjs';
 import {Router} from '@angular/router';
+import {get} from 'lodash-es';
 
 @Component({
   selector: 'app-login-page',
@@ -63,7 +64,7 @@ export class LoginPageComponent implements OnInit {
   public getErrors(control: string) {
     return {
       ...this.genericErrors,
-      ...(this.backendErrors[control] ?? {})
+      ...get(this.backendErrors, control, {})
     };
   }
 }
