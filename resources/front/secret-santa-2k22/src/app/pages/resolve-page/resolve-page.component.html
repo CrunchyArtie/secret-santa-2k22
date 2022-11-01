@@ -1,0 +1,14 @@
+<div class="box">
+  <div class="box-body" [class.active]="active" (mouseenter)="active = true" (click)="active = !active">
+    <div class="card">
+      <p>{{((raqouc$ | async)?.reindeer | titlecase)}}</p>
+      <p>A.K.A.</p>
+      <p>{{((raqouc$ | async)?.name | titlecase)}}</p>
+    </div>
+    <div class="box-lid">
+
+      <div class="box-bowtie"></div>
+
+    </div>
+  </div>
+</div>
