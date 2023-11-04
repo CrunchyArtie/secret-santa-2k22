@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+//    protected $with = ['raqouc'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,5 +49,9 @@ class User extends Authenticatable
 
     public function raqouc() {
         return $this->hasOne(User::class, 'id', 'raqouc_id');
+    }
+
+    public function santa() {
+        return $this->belongsTo(User::class, 'raqouc_id', 'id');
     }
 }

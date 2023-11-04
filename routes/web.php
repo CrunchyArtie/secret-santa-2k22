@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+if (!!env('APP_RAQOUC_IS_EDITABLE', false)) {
+    Route::middleware(['web', 'guest'])->group(function () {
+        Route::controller(\App\Http\Controllers\AdminPanelController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+        });
+    });
+}
+
 Route::any('/{any}', function () {
-     return ['Laravel' => app()->version()];
+    return ['Laravel' => app()->version()];
 //    return view('angular');
 //    abort(404);
 })->where('any', '^(?!api).*$');
